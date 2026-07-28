@@ -79,3 +79,85 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+def display_menu():
+    """Prints the interactive to-do list menu."""
+    print("============================")
+    print("      TO-DO LIST MENU       ")
+    print("============================")
+    print("1. Add task")
+    print("2. View tasks")
+    print("3. Delete task")
+    print("4. Quit")
+
+
+def add_task(tasks):
+    """Prompts for a new task description and appends it to the tasks list."""
+    description = input("Enter task: ").strip()
+    if description:
+        tasks.append(description)
+        print(f'Task added: "{description}"')
+    else:
+        print("Error: Task description cannot be empty.")
+
+
+def view_tasks(tasks):
+    """Displays all current tasks with 1-based index numbers."""
+    if not tasks:
+        print("Your to-do list is currently empty.")
+        return
+
+    print("Your Tasks:")
+    for index, task in enumerate(tasks, start=1):
+        print(f"{index}. {task}")
+
+
+def delete_task(tasks):
+    """
+    Shows tasks and prompts the user for a 1-based index number to delete.
+    Validates choice bounds and handles non-numeric input gracefully.
+    """
+    if not tasks:
+        print("Your to-do list is empty. Nothing to delete.")
+        return
+
+    view_tasks(tasks)
+    try:
+        task_num = int(input("Enter task number to delete: "))
+        # Convert 1-based user input to 0-based Python list index
+        index = task_num - 1
+
+        if 0 <= index < len(tasks):
+            removed_task = tasks.pop(index)
+            print(f'Task "{removed_task}" has been removed.')
+        else:
+            print("Error: Invalid task number. Please try again.")
+    except ValueError:
+        print("Error: Please enter a valid number.")
+
+
+def main():
+    tasks = []
+
+    while True:
+        display_menu()
+        choice = input("Enter your choice (1-4): ").strip()
+        print()  # Spacer line for clean UI formatting
+
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            view_tasks(tasks)
+        elif choice == "3":
+            delete_task(tasks)
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice! Please select an option between 1 and 4.")
+
+        print()  # Spacer line before repeating the menu cycle
+
+
+if __name__ == "__main__":
+    main()
