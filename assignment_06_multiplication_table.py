@@ -55,3 +55,63 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+def print_single_table(number):
+    """
+    Prints the multiplication table for a given number from 1 to 12.
+    """
+    print(f"Multiplication Table for {number}:")
+    for i in range(1, 13):
+        # Alignment keeps columns neat when numbers grow in digits
+        print(f"{number:<3} x  {i:<2} =  {number * i}")
+
+
+def print_tables_up_to(n):
+    """
+    Prints multiplication tables for every number from 1 to N,
+    separated by a horizontal line.
+    """
+    if n <= 0:
+        print("Error: Please enter a positive integer.")
+        return
+
+    for num in range(1, n + 1):
+        print_single_table(num)
+        # Print a separator line after each table except the last one
+        if num < n:
+            print("---------------------------")
+
+
+def main():
+    # -------------------------------------------------------------------------
+    # PART A — Single Table
+    # -------------------------------------------------------------------------
+    print("=== PART A: Single Table ===")
+    try:
+        single_num = int(input("Enter a number: "))
+        if single_num <= 0:
+            print("Error: Please enter a positive integer.")
+            return
+        print_single_table(single_num)
+    except ValueError:
+        print("Error: Please enter a valid integer.")
+        return
+
+    print("\n")  # Spacing between Part A and Part B
+
+    # -------------------------------------------------------------------------
+    # PART B — Tables from 1 to N
+    # -------------------------------------------------------------------------
+    print("=== PART B: Tables from 1 to N ===")
+    try:
+        limit_num = int(input("Enter N: "))
+        if limit_num <= 0:
+            print("Error: Please enter a positive integer.")
+            return
+        print_tables_up_to(limit_num)
+    except ValueError:
+        print("Error: Please enter a valid integer.")
+
+
+if __name__ == "__main__":
+    main()
