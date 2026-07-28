@@ -39,3 +39,75 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+
+def calculate_sum(numbers):
+    """Calculate all elements in the list using loops"""
+    total = 0
+    for num in numbers:
+        total += num
+    return total
+
+
+def calculate_average(numbers):
+    """Calculate the average of the list"""
+    if len(numbers) == 0:
+        return 0
+    total = calculate_sum(numbers)
+    return total / len(numbers)
+
+
+def find_maximum(numbers):
+    """Find the maximum value in the list using loops"""
+    max_value = numbers[0]
+    for num in numbers[1:]:
+        if num > max_value:
+            max_value = num
+    return max_value
+
+
+def find_minimum(numbers):
+    """Find the minimum value in the list using loops"""
+    min_value = numbers[0]
+    for num in numbers[1:]:
+        if num < min_value:
+            min_value = num
+    return min_value
+
+
+def main():
+    # Ask the user for the count of numbers
+    try:
+        n = int(input("How many numbers? "))
+    except ValueError:
+        print("Error: Please enter a positive integer.")
+        return
+
+    if n <= 0:
+        print("Error: Please enter a positive integer.")
+        return
+
+    numbers = []
+    for i in range(n): # fixed: was 'for i in range(n);' with semicolon
+        value = float(input(f"Enter number {i+1}: "))
+        
+        if value.is_integer():
+            value = int(value)
+        numbers.append(value)
+
+    # calculate results using the functions
+    total_sum = calculate_sum(numbers)
+    average = calculate_average(numbers) # fixed typo here
+    max_value = find_maximum(numbers)
+    min_value = find_minimum(numbers)
+
+    # display the results
+    print("\nResults:")
+    print(f"Sum: {total_sum}")
+    print(f"Average: {average}")
+    print(f"Maximum: {max_value}")
+    print(f"Minimum: {min_value}")
+
+
+if __name__ == "__main__": # fixed: was __main__
+    main()
